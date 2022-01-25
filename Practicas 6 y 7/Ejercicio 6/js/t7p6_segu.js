@@ -27,29 +27,38 @@ function mostrar_ccaa(xhttp) {
   }
 }
 
+// Sólo llamo a la siguiente función que carga las provincias.
+function fccaa() {
+  fprovincia();
+
+}
+
 //
 //  ZONA PROVINCIA
 //
 
+
 // Cargar las provincias de la BBDD
-function fccaa() {
+function fprovincia() {
+    eliminar_provincias();
+    // Cuando cambia la CCAA, cargar provincias
+    let provincias = "php/getProvincias.php";
+    let ccaaSelect = document.getElementById(`id_ccaa`).value; // obtengo el id de la CCAA
 
-  // Elimino las posibles provincias cargadas anteriormente
-  eliminar_provincias();
-  
-  // Cuando cambia la CCAA, cargar provincias
-  let provincias = "php/getProvincias.php";
-  let ccaaSelect = document.getElementById(`id_ccaa`).value; // obtengo el id de la CCAA
-
-  // Pido la lista de provincias al sv PHP (async)
-  loadDoc(provincias, ccaaSelect, mostrar_provincias);
-  // Una vez cargadas, pido los municipios
-  //fmunicipio();
+    // Pido la lista de provincias al sv PHP (async)
+    loadDoc(provincias, ccaaSelect, mostrar_provincias);
+    // Una vez cargadas, pido los municipios
+    //fmunicipio();
 
 }
 
+
 function mostrar_provincias(xhttp){
 
+  // Compruebo si hay provincias cargadas y las elimino
+  // if(!(document.getElementById("id_provincia").length == 1  && document.getElementById("id_provincia").innerText == 'Elegir una provincia')){
+  //   eliminar_provincias();
+  // }
 
   var datos = JSON.parse(xhttp.responseText);
   for (let i = 0; i < datos.length; i++) {
@@ -58,11 +67,6 @@ function mostrar_provincias(xhttp){
     var texto = document.createTextNode(datos[i].provincia);
     option.appendChild(texto);
     document.getElementById("id_provincia").appendChild(option);
-  }
-
-  // En caso de que la comunidad sea uniprovincial se cargan directamente los municipios
-  if(document.getElementById("id_provincia").length == 1){
-    fprovincia();
   }
 }
 
@@ -76,7 +80,7 @@ function eliminar_provincias(){
 //
 
 // Cargar los municipios de la BBDD
-function fprovincia() {
+function fmunicipio() {
 
   // Cuando cambia la provincia, cargar municipios
   let municipios = "php/getMunicipios.php";
@@ -86,14 +90,14 @@ function fprovincia() {
   // Pido la lista de municipios al sv PHP (async)
   loadDoc(municipios, provSelect, mostrar_municipios);
 
-
 }
-
 
 function mostrar_municipios(xhttp){
 
-  // Elimino los posibles municipios cargados anteriormente
+  // Compruebo si hay municipios cargadas y los elimino
+  if(!(document.getElementById("id_municipio").length == 1 && document.getElementById("id_municipio").innerText == 'Elegir un municipio')){
     eliminar_municipios();
+  }
 
   var datos = JSON.parse(xhttp.responseText);
   for (let i = 0; i < datos.length; i++) {
@@ -108,43 +112,4 @@ function mostrar_municipios(xhttp){
 function eliminar_municipios(){
   let provincias = document.getElementById("id_municipio");
   provincias.innerHTML = '';
-}
-
-
-//
-//  ZONA RESULTADO
-//
-
-// Función para escribir los valores del municipio en el HTML
-function fmunicipio() {
-
-  // Cuando cambia la provincia, cargar municipios
-  let municipios = "php/getDatosMunicipio.php";
-  let provSelect = document.getElementById(`id_municipio`).value; // obtengo el id del municipio
-
-
-  // Pido los datos del municipio al sv (async)
-  loadDoc(municipios, provSelect, mostrar_resultado);
-  
-}
-
-function mostrar_resultado(xhttp){
-
-  
-
-  let datos = JSON.parse(xhttp.responseText);
-
-  document.getElementById('id_resultado').style.display = "contents";
-
-  document.getElementById('id_nombreMun').innerText = datos[0].municipio;
-  document.getElementById('id_idMun').innerText = datos[0].id;
-  document.getElementById('id_latMun').innerText = datos[0].latitud;
-  document.getElementById('id_lonMun').innerText = datos[0].longitud;
-
-
-
-}
-
-function elimiar_resultado(){
-
 }

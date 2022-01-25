@@ -26,6 +26,7 @@ function nuevoAjax() {
 // cFunction: mostrar_ccaa
 function loadDoc(url, data, cFunction) {
   var xhttp;
+  var cache = "nocache=" + Math.random();
   xhttp = nuevoAjax();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
@@ -34,7 +35,15 @@ function loadDoc(url, data, cFunction) {
   };
   xhttp.open("POST", url, true);
   xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-  xhttp.send(JSON.stringify({"id_ccaa": data}));
+  if(url == "php/getCcaa.php"){
+    xhttp.send();
+  } else if(url == "php/getProvincias.php"){
+    xhttp.send(`ccaa_id=${data}`);
+  } else if (url == "php/getMunicipios.php") {
+    xhttp.send(`provincia_id=${data}&${cache}`);
+  } else if (url == "php/getDatosMunicipio.php"){
+    xhttp.send(`municipio_id=${data}&${cache}`);
+  }
 }
 
 
