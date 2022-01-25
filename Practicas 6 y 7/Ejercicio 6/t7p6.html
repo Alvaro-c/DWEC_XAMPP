@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>España</title>
+
+    <script src="js/ajax_post.js"></script>
+    <script src="js/t7p6.js"></script>
+
+    <style>
+        .resultado {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>España: Comunidades - Pronvincias - Municipios</h1>
+    <p>
+    <form action="" method="post">
+        <fieldset>
+            <legend>Seleccionar datos</legend>
+            <select name="ccaa" id="id_ccaa">
+                <option value="">Elegir una comunidad</option>
+            </select>
+            <select name="provincia" id="id_provincia">
+                <option value="">Elegir una provincia</option>
+            </select>
+            <select name="municipio" id="id_municipio">
+                <option value="">Elegir un municipio</option>
+            </select>
+        </fieldset>
+    </form>
+    </p>
+    <p>
+    <div id="id_resultado" class="resultado">
+        <h3 id="id_nombreMun"></h3>
+        <p>ID: <span id="id_idMun"></span></p>
+        <p>Latitud: <span id="id_latMun"></span></p>
+        <p>Longitud: <span id="id_lonMun"></span></p>
+    </div>
+</body>
+
+</html>
