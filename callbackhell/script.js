@@ -63,6 +63,50 @@ ajaxPost.send();
 
 urlPost = 'https://jsonplaceholder.typicode.com/posts'; // Esta url tiene post de usuarios
 urlComments = 'https://jsonplaceholder.typicode.com/comments'; // Esta url tiene comentarios a los posts
-postId = 1;
+postId = 3;
 
-let promesa = new Promise();
+let xhttpPost, xhttpComms;
+let promesa1 = new Promise((resolve, reject) => {
+
+    xhttpPost = new XMLHttpRequest();
+    xhttpPost.open('GET', urlPost);
+    xhttpPost.addEventListener('load', () => {
+        let posts = JSON.parse(xhttpPost.responseText);
+        let elegido = posts.filter(post => post.userId == 1 && post.id == postId);
+        
+        resolve(elegido);
+
+    });
+    xhttpPost.send();
+
+});
+
+let promesa2 = new Promise((resolve, reject) => {
+
+    xhttpComms = new XMLHttpRequest();
+    xhttpComms.open('GET', urlComments);
+    xhttpComms.addEventListener('load', () => {
+
+        let comments = JSON.parse(xhttpComms.responseText);
+        let commelegido = comments.filter(comment => comment.postId == postId);
+        resolve(commelegido);
+
+    });
+    xhttpComms.send();
+
+});
+
+
+promesa1
+    .then((post) => {
+
+        console.table(post);
+        return (promesa2);
+    })
+    .then((comments) => {
+
+        console.table(comments);
+    })
+    .catch((error) => {
+        console.log('ERRRROOOORRR', error);
+    });
