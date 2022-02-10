@@ -7,6 +7,10 @@ let usersURL = 'https://jsonplaceholder.typicode.com/users';
 let albumsURL = 'https://jsonplaceholder.typicode.com/albums';
 let photosURL = 'https://jsonplaceholder.typicode.com/photos';
 
+// Variables globales para formar la tabla más adelante
+let firstAlbum, albumsLength;
+
+
 // Función auxiliar para seleccionar elementos por id
 function id(i) {
     return document.getElementById(i);
@@ -18,6 +22,7 @@ function start() {
     // Elementos del DOM a seleccionar
     let select = id('users');
 
+    // Cadena de promesas. 1. Users; 2. Albums; 3. Portadas
     promesa = fetch(usersURL)
         .then((usersP) => {
             return usersP.json();
@@ -30,6 +35,9 @@ function start() {
             return albumP.json();
         })
         .then((albums) => {
+            // Se cuentan el número de albumes para más adelante cargar las fotos. 
+            // Es el límite de un bucle for
+            albumsLength = albums.length;
             createTable(albums);
             return fetch(photosURL);
         })
@@ -37,16 +45,18 @@ function start() {
             return photosP.json();
         })
         .then((photos) => {
-            console.log(photos);
+            
             loadPhotos(photos);
         })
 
 }
 
+// Función que crea el select desplegable
 function createSelect(users) {
 
     let select = id('users');
 
+    // El bucle for crea un select por cada valor encontrado
     for (let i = 0; i < users.length; i++) {
 
         let option = document.createElement('option');
@@ -59,6 +69,7 @@ function createSelect(users) {
 
 }
 
+// Función para crear la tabla. El for crea las filas necesarias y 3 columnas por cada fila. 
 function createTable(albums) {
 
     let tabla = id('tabla');
@@ -78,7 +89,8 @@ function createTable(albums) {
         title.innerText = albums[i].title;
         tr.appendChild(title);
 
-
+        // Asigna un id correspondiente al album en la columna de la imagen
+        // Después con ese id se inserta la imagen correspondiente
         let thumbnail = document.createElement('td');
         thumbnail.setAttribute("id", `album${albums[i].id}`);
         tr.appendChild(thumbnail);
@@ -92,10 +104,16 @@ function createTable(albums) {
 }
 
 function loadPhotos(photos) {
+
+    // Selección del texto del primer ID en la tabla
+    let start = document.querySelector('#tabla > tr:nth-child(2) > td:nth-child(1)').innerText;
+    start = parseInt(start);
+    // Ese id es donde se van a empezar a insertar imágenes. Se suma la cantidad de albumes para el for
+    albumsLength = start + albumsLength;
     
-
-    for (let i = 0; i < photos.length; i++) {
-
+    // El for va desde el primer id (primera celda de la tabla) hasta el número de albumes que tenga ese artista
+    for (let i = start-1; i < albumsLength-1; i++) {
+        
         let td = id(`album${i+1}`);
         let img = document.createElement('img');
         img.setAttribute("src", `${photos[i].thumbnailUrl}`);
