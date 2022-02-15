@@ -2,6 +2,7 @@
 document.addEventListener('DOMContentLoaded', start);
 id('users').addEventListener('change', start);
 
+
 // URLs
 let usersURL = 'https://jsonplaceholder.typicode.com/users';
 let albumsURL = 'https://jsonplaceholder.typicode.com/albums';
