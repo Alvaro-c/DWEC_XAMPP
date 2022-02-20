@@ -1,0 +1,21 @@
+{
+    "name":"American Horror Story",
+    "cast": [
+        {
+            "name": "Evan Peters",
+            "character": "Tate Langdon",
+            "image": "Evan_Peters.jpg"
+        }, 
+        {
+            "name": "Sarah Paulson",
+            "character": "Lana Winters",
+            "image": "Sarah Paulson.jpg"
+        }, 
+        {
+            "name": "Lily Rabe",
+            "character": "Misty Day",
+            "image": "Lily_Rabe.jpg"
+        }
+    ]
+
+}
