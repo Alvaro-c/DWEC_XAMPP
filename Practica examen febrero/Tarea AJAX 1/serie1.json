@@ -1,0 +1,21 @@
+{
+    "name":"The Expanse",
+    "cast": [
+        {
+            "name": "Cara Gee",
+            "character": "Camina Drummer",
+            "image": "Camina_Drummer.png"
+        }, 
+        {
+            "name": "Cas Anvar",
+            "character": "Alex Kamal",
+            "image": "Alex_Kamal.png"
+        }, 
+        {
+            "name": "Frankie Adams",
+            "character": "Bobbie Draper",
+            "image": "Bobbie_Draper.jpg"
+        }
+    ]
+
+}

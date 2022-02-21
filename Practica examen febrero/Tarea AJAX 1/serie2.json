@@ -1,0 +1,21 @@
+{
+    "name":"Twin Peaks",
+    "cast": [
+        {
+            "name": "David Lynch",
+            "character": "Gordon Cole",
+            "image": "David_Lynch.png"
+        }, 
+        {
+            "name": "Sherilyn Fenn",
+            "character": "Audrey Horne",
+            "image": "Audrey_Horne.jpg"
+        }, 
+        {
+            "name": "Kyle MacLachlan",
+            "character": "Dale Cooper",
+            "image": "Dale_Coope.jpg"
+        }
+    ]
+
+}

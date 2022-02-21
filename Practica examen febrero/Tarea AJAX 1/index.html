@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarea AJAX 1</title>
+    <script src="script.js"></script>
+
+    <style>
+        table {
+            border: solid 1px #000000;
+            border-collapse: collapse;
+            border-spacing: 0;
+            font: normal 13px Arial, sans-serif;
+        }
+        
+        table th {
+            background-color: #DDEFEF;
+            border: solid 1px #000000;
+            color: #336B6B;
+            padding: 10px;
+            text-align: left;
+            text-shadow: 1px 1px 1px #fff;
+        }
+        
+        table td {
+            border: solid 1px #000000;
+            color: #333;
+            padding: 10px;
+            text-shadow: 1px 1px 1px #fff;
+        }
+        
+        body>section>table>tr:nth-child(1)>td:nth-child(1) {
+            color: white;
+        }
+        
+        table img {
+            width: 300px;
+            height: 300px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1 class="titulo">Un título</h1>
+    <div>
+        <select id="color">
+            <option>white</option>
+            <option>blue</option>
+            <option>red</option>
+        </select>
+    </div><br>
+
+    <div>
+        <label for="serie">Introduce la serie: </label> <input type="text" id="serie"> <input type="button" name="enviar" id="enviar" value="Enviar">
+        <div>
+            <span class="resultados"></span>
+
+            <table id="tabla">
+
+            </table>
+        </div>
+    </div>
+
+
+
+
+
+
+</body>
+
+</html>
